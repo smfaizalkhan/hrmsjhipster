@@ -1,0 +1,10 @@
+{
+    "hrmsApp": {
+        "Roles": {
+            "null": "",
+            "HR": "HR",
+            "DEVELOPER": "DEVELOPER",
+            "MANAGER": "MANAGER"
+        }
+    }
+}

@@ -59,6 +59,7 @@ public class SecurityUtilsUnitTest {
 
         assertThat(SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.USER)).isTrue();
         assertThat(SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)).isFalse();
-    }
+    }   
+    
 
 }

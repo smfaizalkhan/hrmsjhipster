@@ -10,4 +10,5 @@ export * from './util/request-util';
 export * from './shared-libs.module';
 export * from './shared-common.module';
 export * from './shared.module';
+export * from './search/search-component';
 export * from './util/datepicker-adapter';

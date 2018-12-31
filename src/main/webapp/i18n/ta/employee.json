@@ -1,0 +1,30 @@
+{
+    "hrmsApp": {
+        "employee": {
+            "home": {
+                "title": "Employees",
+                "createLabel": "Employee-ஐ உருவாக்கு",
+                "createOrEditLabel": "Employee -ஐ மாற்று (அ) உருவாக்கு"
+            },
+            "created": "Employee புதிதாக உருவாக்கப்பட்டது, அடையாளம் {{ param }}",
+            "updated": "Employee மாற்றப்பட்டது, அடையாளம்  {{ param }}",
+            "deleted": "A Employee நீக்கப்பட்டது, அடையாளம {{ param }}",
+            "delete": {
+                "question": "நீக்குவதற்கு உறுதி செய் Employee {{ id }}?"
+            },
+            "detail": {
+                "title": "Employee"
+            },
+            "doj": "Doj",
+            "reportingto": "Reportingto",
+            "login": "Login",
+            "password": "Password",
+            "firstname": "Firstname",
+            "lastname": "Lastname",
+            "email": "Email",
+            "reportess": "Reportess",
+            "contactnumber": "Contactnumber",
+            "authority": "Authority"
+        }
+    }
+}

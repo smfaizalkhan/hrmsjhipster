@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="employee">
+            <h2><span jhiTranslate="hrmsApp.employee.detail.title">Employee</span> {{employee.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hrmsApp.employee.doj">Doj</span></dt>
+                <dd>
+                    <span>{{employee.doj}}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsApp.employee.reportingto">Reportingto</span></dt>
+                <dd>
+                    <span>{{employee.reportingto}}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsApp.employee.login">Login</span></dt>
+                <dd>
+                    <span>{{employee.login}}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsApp.employee.password">Password</span></dt>
+                <dd>
+                    <span>{{employee.password}}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsApp.employee.firstname">Firstname</span></dt>
+                <dd>
+                    <span>{{employee.firstname}}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsApp.employee.lastname">Lastname</span></dt>
+                <dd>
+                    <span>{{employee.lastname}}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsApp.employee.email">Email</span></dt>
+                <dd>
+                    <span>{{employee.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsApp.employee.reportess">Reportess</span></dt>
+                <dd>
+                    <span>{{employee.reportess}}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsApp.employee.contactnumber">Contactnumber</span></dt>
+                <dd>
+                    <span>{{employee.contactnumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsApp.employee.authority">Authority</span></dt>
+                <dd>
+                    <span>{{employee.authority}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/employee', employee.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

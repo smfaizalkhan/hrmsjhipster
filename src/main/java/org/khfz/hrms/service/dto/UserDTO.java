@@ -5,9 +5,9 @@ import org.khfz.hrms.config.Constants;
 import org.khfz.hrms.domain.Authority;
 import org.khfz.hrms.domain.User;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.Column;
 import javax.validation.constraints.*;
 import java.time.Instant;
 import java.util.Set;
@@ -51,7 +51,10 @@ public class UserDTO {
 
     private Instant lastModifiedDate;
 
-    private Set<String> authorities;
+    private Set<String> authorities;    
+   
+    private String password;
+
 
     public UserDTO() {
         // Empty constructor needed for Jackson.
@@ -75,7 +78,15 @@ public class UserDTO {
             .collect(Collectors.toSet());
     }
 
-    public Long getId() {
+    public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Long getId() {
         return id;
     }
 

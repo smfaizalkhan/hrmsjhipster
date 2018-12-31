@@ -1,47 +1,67 @@
 package org.khfz.hrms.cucumber.stepdefs;
 
-import cucumber.api.java.Before;
+import static org.assertj.core.api.Assertions.*;
+import java.util.Arrays;
+import java.util.List;
+
+import org.khfz.hrms.domain.User;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import org.khfz.hrms.web.rest.UserResource;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import io.cucumber.datatable.DataTable;
 
 public class UserStepDefs extends StepDefs {
 
-    @Autowired
-    private UserResource userResource;
+	private ResponseEntity<List> responseEntityOfAuthorities;
+	private ResponseEntity<String> responseEntity;
 
-    private MockMvc restUserMockMvc;
+	@When("i login as {string} with password {string}")
+	public void i_login_as_with_password(String userId, String password) {
+		// Write code here that turns the phrase above into concrete actions
+		this.setXsrfToken(userId, password);
+	}
 
-    @Before
-    public void setup() {
-        this.restUserMockMvc = MockMvcBuilders.standaloneSetup(userResource).build();
-    }
+	@And("I'm able to access getAuthorities method")
+	public void i_m_able_to_access_getAuthorities_method() {
+	
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add(HttpHeaders.COOKIE, jsessionId);
+		httpHeaders.add(HttpHeaders.COOKIE, xsrfToken);
 
-    @When("I search user {string}")
-    public void i_search_user(String userId) throws Throwable {
-        actions = restUserMockMvc.perform(get("/api/users/" + userId)
-                .accept(MediaType.APPLICATION_JSON));
-    }
+		responseEntityOfAuthorities = testRestTemplate.exchange("/api/users/authorities", HttpMethod.GET,
+				new HttpEntity<>(httpHeaders), List.class);
+	
+		assertThat(responseEntityOfAuthorities.getStatusCode()).isEqualTo(HttpStatus.OK);
+	}
 
-    @Then("the user is found")
-    public void the_user_is_found() throws Throwable {
-        actions
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
-    }
+	@Then("I get List of Authorities")
+	public void i_get_List_of_Authorities(DataTable dataTable) {
 
-    @Then("his last name is {string}")
-    public void his_last_name_is(String lastName) throws Throwable {
-        actions.andExpect(jsonPath("$.lastName").value(lastName));
-    }
+		List<String> roles = dataTable.asList();
+		assertThat(responseEntityOfAuthorities.getBody()).isEqualTo(roles);
 
+	}
+
+	@When("i access getAuthorities method")
+	public void i_access_getAuthorities_method() {
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add(HttpHeaders.COOKIE, jsessionId);
+		httpHeaders.add(HttpHeaders.COOKIE, xsrfToken);
+		 responseEntity = testRestTemplate.exchange("/api/users/authorities", HttpMethod.GET,
+				new HttpEntity<>(httpHeaders), String.class);
+		
+	}
+
+	@Then("i get {int} status code")
+	public void i_get_status_code(Integer int1) {
+	    // Write code here that turns the phrase above into concrete actions
+	 assertThat(HttpStatus.FORBIDDEN).isEqualTo(responseEntity.getStatusCode());
+	}
 }

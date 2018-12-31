@@ -1,0 +1,12 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Faizal (generated)" id="1545409539422-1">
+        <dropForeignKeyConstraint baseTableName="employee" constraintName="fk_employee_usertoemployee_id"/>
+    </changeSet>
+    <changeSet author="Faizal (generated)" id="1545409539422-2">
+        <dropUniqueConstraint constraintName="ux_employee_usertoemployee_id" tableName="employee"/>
+    </changeSet>
+    <changeSet author="Faizal (generated)" id="1545409539422-3">
+        <dropColumn columnName="usertoemployee_id" tableName="employee"/>
+    </changeSet>
+</databaseChangeLog>
